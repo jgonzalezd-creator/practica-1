@@ -6,37 +6,146 @@
     <title>My Website</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+<style> 
+    body { margin: 0;
+      background-color: black 
+    } 
+
+.video-fondo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.navbar {                                                                                  
+  color:black;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.container1 {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "menu content"
+    "footer footer";
+  grid-template-columns: 1fr 3fr;
+  gap: 3px;
+  background-color: rgb(152, 152, 152);
+  padding: 5px;
+}
+.container1 div {
+  background-color: rgb(0, 0, 0);
+  padding: 10px;
+}
+.container1 div.header {
+  grid-area: header;
+  text-align: center;
+  color: white;
+}
+.container1 div.menu {
+  grid-area: menu;
+  color: white;
+}
+.container1 div.content {
+  grid-area: content;
+  color: white;
+}
+.container1 div.footer {
+  grid-area: footer;
+  text-align: center;  
+  color: white;
+}
+
+
+
+</style>
+    
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+
+
+        <!-- Navbar -->
+    
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">NOM FESTI</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  <div class="container text-center">
-  <div class="row">
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cartell.png" download>Programació</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+            Tickets
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Primer día</a></li>
+            <li><a class="dropdown-item" href="#">Segundo día</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Actuacions especials</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+         <p><a class="nav-link" aria-disabled="true" href="#CL">Contacte</a>
+       </p> </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
-  </div>
-</div>
   </div>
 </nav>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    </nav>
+
+    
+<video class="video-fondo" autoplay muted loop playsinline>
+  <source src="media/video-fondo.mp4" type="video/mp4">
+ 
+</video>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      Projectes destacats
+    </div>
+    <div class="col">
+      Programació i activitats
+    </div>
+    <div class="col">
+      Contacto
+
+    </div>
+  </div>
+</div>
+
+<h1 style="color: white;" font-family="Times New Roman", Times, serif;> Missatge</h1>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<h4 style="color: white;">MISSATGE DEL FESTIVAL I INFO DELS VALORS ETC</h4> </h4>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ 
+   <div class="container1">
+  <div class="header"><h2 id="CL">Cómo llegar</h2></div>
+  <div class="menu"><img src="media/ubicació.jpg" width="350" height="200" alt="Foto Ubicació"></div>
+  <div class="content"><h3>Lorem Ipsum</h3><p>Lorem ipsum odor amet, consectetuer adipiscing elit. Ridiculus sit nisl laoreet facilisis aliquet. Potenti dignissim litora eget montes rhoncus sapien neque urna. Cursus libero sapien integer magnis ligula lobortis quam ut.</p></div>
+  <div class="footer"></div> <a style="color: white;" style="text-align: center;" href="https://maps.app.goo.gl/TZp8EdmsVKZANYxNA" target="_blank">Parc del Fòrum C. De la pau, 12 | 08930 Barcelona | Metro fòrum (L4)</a>
+ </div>
+</div>
+<p>CONTACTE posar form i footer</p>
+  <script src="js/bootstrap.bundle.min.js"></script>   
+
 </body>
 </html>
