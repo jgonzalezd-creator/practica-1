@@ -165,45 +165,50 @@
 </nav>
     </nav>
 
- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-  </ol>
+ <!-- CARRUSEL AMB LOGO, TÍTOL I FRASE CENTRADA A SOBRE -->
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  
+  <!-- Contingut per sobre de les imatges -->
+  <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100">
+    <!-- Logo a sobre del títol -->
+    <img src="LOGOECHOFEST.png" alt="Logo Echofest" style="height: 100px; width: auto;" class="mb-3">
+    
+    <!-- Títol Gran -->
+    <h1 class="hammersmith-one-regular display-1 fw-bold" style="color: #24ec20; letter-spacing: 3px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">
+      ECHOFEST
+    </h1>
+    
+    <!-- Frase centrada -->
+    <p class="lead text-center text-white max-w-75" style="font-family: 'Space Grotesk', sans-serif; text-shadow: 1px 1px 5px rgba(0,0,0,0.9); font-size: 1.25rem;">
+      On la música, la llum i l'energia es troben al cor del Parc del Fòrum.
+    </p>
+  </div>
 
-  <!-- Wrapper for slides -->
+  <!-- Imatges de fons del carrusel -->
   <div class="carousel-inner">
-    <div class="item active">
-      <img src="FOTOFESTIVAL.jpg" class="d-block w-100" alt="FOTOFESTIVAL" style="max-height: 450px; object-fit: cover;">
+    <div class="carousel-item active">
+      <img src="FOTOFESTIVAL.jpg" class="d-block w-100 banner" alt="Fotofestival">
     </div>
-
-    <div class="item">
-      <img src="FESTIVAL.jpeg" alt="FESTIVAL">
+    <div class="carousel-item">
+      <img src="FESTIVAL.jpeg" class="d-block w-100 banner" alt="Festival">
     </div>
-
-    <div class="item">
-      <img src="ESPECTACLE" alt="ESPECTACLE">
+    <div class="carousel-item">
+      <img src="ESPECTACLE.jpeg" class="d-block w-100 banner" alt="Espectacle">
     </div>
   </div>
 
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-<div class="container text-center">
+  <!-- Botons per canviar d'imatge -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Següent</span>
+  </button>
 
-<p class="lead" style="color: white;">
-    Echofest 2026: on la música, la llum i l'energia es troben al cor del Parc del Fòrum.
-  </p>
 </div>
+
    
 <div class="container text-center">
   <div class="row">
