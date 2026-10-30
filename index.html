@@ -1,812 +1,916 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Echofest</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap y estilos -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Tipografías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Space+Grotesk:wght@300..700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Hammersmith+One&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
+    <style>
+        /* ESTILO GENERAL */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background-color: black;
+            font-family: 'Manrope', sans-serif;
+            color: white;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        h2, p {
+            margin: 10px;
+        }
+
+        .hammersmith-one-regular {
+            font-family: "Hammersmith One", sans-serif;
+            font-weight: 400;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: black;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+
+        .navbar .nav-link {
+            color: #24ec20;
+        }
+
+        .navbar .nav-link:hover {
+            color: white;
+        }
+
+        .navbar .navbar-nav {
+            gap: 10px;
+        }
+
+        .navbar .dropdown-menu {
+            background-color: black;
+        }
+
+        .navbar .dropdown-item {
+            color: white;
+        }
+
+        .navbar .dropdown-item:hover {
+            background-color: #24ec20;
+            color: black;
+        }
+
+        .navbar-toggler {
+            background-color: #24ec20;
+        }
+
+        /* BANNER / CARRUSEL */
+
+        .banner {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-caption {
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-caption h1 {
+            color: #24ec20;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .carousel-caption p {
+            font-family: 'Space Grotesk', sans-serif;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.9);
+            font-size: 1.25rem;
+        }
+
+        /* CONTENIDO GENERAL */
+
+        .container {
+            color: white;
+        }
+
+        .title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: -2px;
+            margin: 30px 20px 12px;
+            color: #24ec20;
+        }
+
+        .subtitle {
+            font-family: 'Manrope', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            margin: 10px 20px 24px;
+            color: white;
+            background-color: black;
+        }
+
+        .section-title {
+            color: #24ec20;
+            margin: 35px 20px 15px;
+        }
+
+        .section-text {
+            color: white;
+            line-height: 1.6;
+            margin: 15px 20px;
+        }
+
+        /* ACORDEONES DE ARTISTAS */
+
+        .accordion {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            padding: 24px;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #555;
+            text-align: left;
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .accordion:hover {
+            background-color: #111;
+        }
+
+        .accordion.active {
+            background-color: black;
+        }
+
+        .accordion:after {
+            content: '\002B';
+            color: #24ec20;
+            font-weight: bold;
+            font-size: 24px;
+            margin-left: auto;
+        }
+
+        .accordion.active:after {
+            content: "\2212";
+        }
+
+        .artist-number {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .artist-name {
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: -1.5px;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: black;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .artist-top {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding-top: 20px;
+        }
+
+        .artist-image {
+            width: 45%;
+            height: 350px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .artist-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .artist-info h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+            color: #24ec20;
+        }
+
+        .artist-info p {
+            color: white;
+            line-height: 1.5;
+            text-align: justify;
+            margin: 10px 0;
+        }
+
+        /* VIDEOS Y CANCIONES */
+
+        .song-card {
+            width: 100%;
+            max-width: 550px;
+            margin-top: 20px;
+        }
+
+        .song-card a {
+            display: block;
+            text-decoration: none;
+            color: white;
+        }
+
+        .song-card img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            border-radius: 12px;
+            transition: opacity 0.3s ease;
+        }
+
+        .song-card a:hover img {
+            opacity: 0.75;
+        }
+
+        .song-title {
+            color: white;
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            margin-top: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .song-card a:hover .song-title {
+            color: #24ec20;
+        }
+
+        .song-title span {
+            color: #24ec20;
+            margin-left: 6px;
+        }
+
+        /* ETIQUETAS */
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .tags span {
+            border: 1px solid #24ec20;
+            padding: 6px 8px;
+            font-size: 10px;
+            color: white;
+        }
+
+        /* FORMULARIO */
+
+        .form-field {
+            margin: 20px;
+            max-width: 500px;
+            color: white;
+        }
+
+        .form-field .form-control {
+            background-color: #111;
+            color: white;
+            border: 1px solid #24ec20;
+        }
+
+        .form-field .form-control:focus {
+            background-color: #111;
+            color: white;
+            border-color: #24ec20;
+            box-shadow: 0 0 5px #24ec20;
+        }
+
+        .form-field label {
+            color: white;
+        }
+
+        .submit-button {
+            margin: 20px;
+            padding: 10px 25px;
+            background-color: #24ec20;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .submit-button:hover {
+            background-color: white;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background-color: #24ec20;
+            color: black;
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: black;
+        }
+
+        footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 768px) {
+            .artist-top {
+                flex-direction: column;
+            }
+
+            .artist-image {
+                width: 100%;
+                height: 280px;
+            }
+
+            .artist-info h1 {
+                font-size: 30px;
+            }
+
+            .artist-name {
+                font-size: 25px;
+            }
+
+            .title {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 17px;
+            }
+
+            .banner {
+                height: 300px;
+            }
+
+            .carousel-caption img {
+                height: 65px !important;
+            }
+
+            .carousel-caption p {
+                font-size: 14px;
+            }
+
+            .carousel-caption h1 {
+                font-size: 40px;
+            }
+        }
+    </style>
 </head>
-    
-<style> 
-    body { margin: 0;
-      background-color: black;
-      width: 80%;
-    } 
-
-.pantalla-carrega {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.navbar {                                                                                  
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-    .navbar .nav-link {
-  color: white;
-    }
-.navbar .nav-link:hover {
-  color: white;
-  }
- 
- .navbar .navbar-nav {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px; 
-  }
-
-  .hammersmith-one-regular {
-  font-family: "Hammersmith One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-    body { margin: 20px;
- background-color: black ;
-font-family: 'manrope', sans-serif;
-
-.pantalla-carrega {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.navbar {                                                                                  
-  font-family: 'Arial', sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-}
-    .navbar .nav-link {
-  color: #24ec20;
-    }
-.navbar .nav-link:hover {
-  color: black;
-}
- .navbar .navbar-nav {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 30px; 
-  }
-    .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1030; 
-  background-color: #000000;
-}
-    .banner{
-  width: 100%;
-  height: 450px;
-  object-fit: cover;
-  display: block;
-}
-
-
-/*css de nav bar*/
-
-    } 
-h2, p {
-  margin: 10px;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #000000;
-}
-
-ul li {
-  float: left;
-}
-
-ul li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-ul li a:hover:not(.active) {
-  background-color: lime;
-}
-
-ul li a.active {
-  background-color: lime;
-}
-
-/*CSS CAROUSEL*/
-* {box-sizing: border-box}
-.mySlides {display: none}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-
-.slideshow-container .mySlides img {
-    width: 100%;
-    height: 600px;
-    object-fit: cover;
-    display: block;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-
-
-
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
-}
-
-
-
-/*CSS SELECTED WORKS*/
-
-.title {
-  font-family: 'Manrope', sans-serif;
-  font-size: 48px;
-  font-weight: 400;
-  letter-spacing: -2px;
-  margin-bottom: 12px;
-  color: lime;
-}
-
-.subtitle {
-  font-family: 'Manrope', sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  margin-bottom: 24px;
-  color: white;
-  background-color: #000000;
-}
-
-
-.accordion {
-  background-color: #000000;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-  transition: 0.4s;
-}
-
-.active, .accordion:hover {
-  background-color: #000000;
-}
-
-.accordion:after {
-  content: '\002B';
-  color: #777;
-  font-weight: bold;
-  float: right;
-  margin-left: 5px;
-}
-
-.active:after {
-  content: "\2212";
-}
-
-.panel {
-  padding: 0 18px;
-  background-color: rgb(0, 0, 0);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-}
-
-
-.artist-image {
-    width: 45%;
-    height: 350px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.artist-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.artist-info h1 {   
-  font-family: 'Manrope', sans-serif;
-  font-size: 48px;
-  font-weight: 400;
-  letter-spacing: -2px;
-  margin-bottom: 12px;
-  color: lime;
- 
-}
-
-.artist-top {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;}
-
-
-.song-card {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-}
-
-
-.song-card a {
-    display: block;
-    text-decoration: none;
-    color: white;
-}
-
-.song-card img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    display: block;
-    border-radius: 12px;
-    transition: opacity 0.3s ease;
-}
-
-.song-card a:hover img {
-    opacity: 0.75;
-}
-
-.song-title {
-    color: white;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    margin-top: 12px;
-    transition: color 0.3s ease;
-}
-
-.song-card a:hover .song-title {
-    color: lime;
-}
-
-.song-title span {
-    color: lime;
-    margin-left: 6px;
-}
-
-
-.tags {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-.tags span {
-    border : 1px solid lime;
-    padding: 6px 8px;
-    font-size: 10px;
-    color: rgb(255, 255, 255)
-}
-</style>
-    
 
 <body>
 
+    <!-- NAVBAR -->
 
+    <nav class="navbar navbar-expand-xl">
+        <div class="container-fluid">
 
-        <!-- Navbar -->
-    
-<nav class="navbar navbar-expand-xl bg-black">
-  <div class="container-fluid">
- 
-<a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-  <img src="LOGOECHOFEST.png" alt="Logo" style="height: 60px; width: auto;">
-  <span class="text-white fs-3 hammersmith-one-regular">Echofest</span>
-     
-</a>
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="LOGOECHOFEST.png" alt="Logo" style="height: 60px; width: auto;">
+                <span class="text-white fs-3 hammersmith-one-regular">Echofest</span>
+            </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Inici</a>
-        </li>
-         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="Programació.png" download="ProgramacioEchofest">Programació</a>
-      
-  <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#projectesdestacats">Projectes destacats</a>
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Obrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-          <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#actualitat">Actualitat</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
-      
-        <li class="nav-item">
-         <p><a class="nav-link" aria-disabled="true" href="#contacte">Contacte</a>
-       </p> </li>
-      </ul>
-    
-    </div>
-  </div>
-</nav>
-    <nav class="navbar navbar-expand-xl bg-black sticky-top">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Inici</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="Programació.png" download="ProgramacioEchofest">Programació</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projectesdestacats">Projectes destacats</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#serveis">Serveis</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#actualitat">Actualitat</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#"
+                            role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Tickets
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Primer día</a></li>
+                            <li><a class="dropdown-item" href="#">Segundo día</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Actuacions especials</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacte">Contacte</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
     </nav>
 
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-  
-  <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100">
-    <img src="LOGOECHOFEST.png" alt="Logo Echofest" style="height: 100px; width: auto;" class="mb-3">
-    <h1 class="hammersmith-one-regular display-1 fw-bold" style="color: #24ec20; letter-spacing: 3px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8);">
-      ECHOFEST
+
+    <!-- BANNER / CARRUSEL -->
+
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <img src="FOTOFESTIVAL.jpg" class="d-block w-100 banner" alt="Fotofestival">
+            </div>
+
+            <div class="carousel-item">
+                <img src="FOTOCONCERT.jpg" class="d-block w-100 banner" alt="Fotoconcert">
+            </div>
+
+            <div class="carousel-item">
+                <img src="ESPECTACLE.jpg" class="d-block w-100 banner" alt="Espectacle">
+            </div>
+
+        </div>
+
+        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100">
+            <img src="LOGOECHOFEST.png" alt="Logo Echofest" style="height: 100px; width: auto;" class="mb-3">
+
+            <h1 class="hammersmith-one-regular display-1 fw-bold">
+                ECHOFEST
+            </h1>
+
+            <p class="lead text-center text-white">
+                On la música, la llum i l'energia es troben al cor del Parc del Fòrum.
+            </p>
+        </div>
+
+        <button class="carousel-control-prev" type="button"
+            data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+
+        <button class="carousel-control-next" type="button"
+            data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Següent</span>
+        </button>
+
+    </div>
+
+
+    <!-- TRES APARTATS INICIALS -->
+
+    <div class="container text-center mt-4">
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <a href="#projectesdestacats" class="text-white text-decoration-none">
+                    Projectes destacats
+                </a>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <a href="#programacio" class="text-white text-decoration-none">
+                    Programació i activitats
+                </a>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <a href="#contacte" class="text-white text-decoration-none">
+                    Contacte
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- SELECTED WORKS / ARTISTES -->
+
+    <h1 class="title" id="projectesdestacats">
+        Selected Works
     </h1>
-    <p class="lead text-center text-white max-w-75" style="font-family: 'Space Grotesk', sans-serif; text-shadow: 1px 1px 5px rgba(0,0,0,0.9); font-size: 1.25rem;">
-      On la música, la llum i l'energia es troben al cor del Parc del Fòrum.
-    </p>
-  </div>
 
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="FOTOFESTIVAL.jpg" class="d-block w-100 banner" alt="Fotofestival">
-    </div>
-    <div class="carousel-item">
-      <img src="FOTOCONCERT.jpg" class="d-block w-100 banner" alt="FOTOCONCERT.jpg">
-    </div>
-    <div class="carousel-item">
-      <img src="ESPECTACLE.jpg" class="d-block w-100 banner" alt="Espectacle.jpg">
-    </div>
-  </div>
-    
-  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Anterior</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Següent</span>
-  </button>
+    <h2 class="subtitle">
+        Una selecció dels treballs dels artistes que formen part del festival.
+    </h2>
 
-</div>
-   
-<div class="container text-center">
-  <div class="row">
-    <div class="col">
-      Projectes destacats
-    </div>
-    <div class="col">
-      Programació i activitats
-    </div>
-    <div class="col">
-      Contacto
-
-    </div>
-  </div>
-</div>
-<h1 class="title"> 
-   Selected Works
-</h1>
-
-<h2 class="subtitle">
-   Una selecció dels treballs dels artistes que formen part del festival. 
-</h2>
-
-<hr style="border: 1px solid #999; margin: 24px 0; color: #999;">
+    <hr style="border: 1px solid #999; margin: 24px 20px;">
 
 
+    <!-- ARTISTA 1: YUNG LEAN -->
 
-<button class="accordion" style="background-color: black; color: white; 
-width: 100%; padding: 24px; border: none; text-align: left; display: flex; 
-align-items: baseline; gap: 24px; cursor: pointer;"><span style="font-family: 'Manrope', 
-sans-serif; font-size: 12px; color: #999;">01/</span><span style="font-size: 36px; font-weight: 400; letter-spacing: -1.5px;"
->YUNG LEAN</span></button>
+    <button class="accordion">
+        <span class="artist-number">01/</span>
+        <span class="artist-name">YUNG LEAN</span>
+    </button>
 
+    <div class="panel">
 
-<div class="panel">
+        <div class="artist-top">
 
-  <div class="artist-top">
+            <img src="YUNG_LEAN.jpg" class="artist-image" alt="Yung Lean">
 
-<img src="YUNG_LEAN.jpg"
-    class="artist-image"
-    alt="Yung Lean" />
+            <div class="artist-info">
 
+                <h1>El so d'una generació</h1>
 
-    <div class="artist-info">
+                <p>
+                    Referent de l'escena underground, Yung Lean combina el cloud rap,
+                    la electrònica i emocions crues per crear un univers sonor especial.
+                    La seva música es mou entre la malenconia i l'eufòria, transportant
+                    el públic a una dimensió íntima i experimental.
+                </p>
 
-      <h1>El so d'una generació</h1>
+            </div>
+        </div>
 
-      
-  <p style="color: white; line-height: 1.5; text-align: justify;">
+        <hr style="border: 1px solid lime; margin: 24px 0;">
 
-Referent de l'escena underground, Yung Lean combina el cloud rap, 
-la electrònica i emocions crues per crear un univers sonor especial. 
-La seva música es mou entre la malenconia i l'eufòria, transportant 
-el públic a una dimensió íntima i experimental. </p>
+        <div class="song-card">
+            <a href="https://youtu.be/UWcBtHdPSKk?si=BFJqw07L_famBhP2"
+                target="_blank" rel="noopener noreferrer">
 
-      
-    </div>
- </div>
+                <img src="maxresdefault.jpg" alt="Yung Lean - videoclip">
 
-<hr style="border: 1px solid lime; margin: 24px 0;">
+                <p class="song-title">
+                    Yung Lean — Highway Patrol (Feat. bladee)
+                    <span>↗</span>
+                </p>
 
+            </a>
+        </div>
 
-
-<div class="song-card">
-
-  <a href="https://youtu.be/UWcBtHdPSKk?si=BFJqw07L_famBhP2"
-     target="_blank"
-     rel="noopener noreferrer">
-
-    <img src="maxresdefault.jpg"
-         alt="Yung Lean - videoclip">
-
-    <p class="song-title">
-      Yung Lean — Highway Patrol (Feat. bladee)
-      <span>↗</span>
-    </p>
-
-  </a>
-
-</div>
-
-
-
-<p class="tags">
-
-  <span class="tag">CLOUD RAP</span>
-  <span class="tag">DREAMY</span>
-  <span class="tag">EXPERIMENTAL</span>
-
-</p>
-
+        <p class="tags">
+            <span>CLOUD RAP</span>
+            <span>DREAMY</span>
+            <span>EXPERIMENTAL</span>
+        </p>
 
     </div>
 
-  </div>
 
-</div>
+    <!-- ARTISTA 2: YUNG BEEF -->
 
+    <button class="accordion">
+        <span class="artist-number">02/</span>
+        <span class="artist-name">YUNG BEEF</span>
+    </button>
 
+    <div class="panel">
 
-<button class="accordion" style="background-color: black; color: white; 
-width: 100%; padding: 24px; border: none; text-align: left; display: flex; 
-align-items: baseline; gap: 24px; cursor: pointer;"><span style="font-family: 'Manrope', sans-serif;
- font-size: 12px; color: #999;">02/</span><span style="font-size: 36px;
-  font-weight: 400; letter-spacing: -1.5px;">YUNG BEEF</span></button>
+        <div class="artist-top">
 
+            <img src="260416_Yung-Beef_Highxtar_0968-1440x1029.jpg"
+                class="artist-image" alt="Yung Beef">
 
+            <div class="artist-info">
 
-<div class="panel">
+                <h1>L'essència del trap</h1>
 
-  <div class="artist-top">
+                <p>
+                    Yung Beef és una de les figures clau del trap underground espanyol.
+                    La seva proposta barreja trap, reggaeton i sons urbans amb una estètica
+                    crua i provocadora. Amb una actitud irreverent i una identitat allunyada
+                    dels convencionalismes, ha contribuït a transformar l'escena urbana
+                    i a obrir nous camins per a les generacions posteriors.
+                </p>
 
-<img src="260416_Yung-Beef_Highxtar_0968-1440x1029.jpg"
-    class="artist-image"
-    alt="Yung Beef" />
+            </div>
+        </div>
 
+        <hr style="border: 1px solid lime; margin: 24px 0;">
 
-    <div class="artist-info">
+        <div class="song-card">
+            <a href="https://youtu.be/CGjwEuPmLS8?si=HgCvaJwui7w_C_46"
+                target="_blank" rel="noopener noreferrer">
 
-      <h1>L'essència del trap</h1>
+                <img src="yungbeef_intro.jpg" alt="Yung Beef - videoclip">
 
-      
-  <p style="color: white; line-height: 1.5; text-align: justify;">
-Yung Beef és una de les figures clau del trap underground espanyol. 
-La seva proposta barreja trap, reggaeton i sons urbans amb una estètica 
-crua i provocadora. Amb una actitud irreverent i una identitat allunyada 
-dels convencionalismes, ha contribuït a transformar l'escena urbana i a obrir
- nous camins per a les generacions posteriors.
-</p>
+                <p class="song-title">
+                    Yung Beef — INTRO
+                    <span>↗</span>
+                </p>
 
-</div>
-  </div>
+            </a>
+        </div>
 
-<hr style="border: 1px solid lime; margin: 24px 0;">
-
-
-
-<div class="song-card">
-
-  <a href="https://youtu.be/CGjwEuPmLS8?si=HgCvaJwui7w_C_46"
-     target="_blank"
-     rel="noopener noreferrer">
-
-    <img src="yungbeef_intro.jpg"
-         alt="Yung Beef - videoclip">
-
-    <p class="song-title">
-      Yung Beef — INTRO
-      <span>↗</span>
-    </p>
-
-  </a>
-
-</div>
-
-
-
-<p class="tags">
-
-  <span class="tag">TRAP</span>
-  <span class="tag">RAP UNDERGROUND</span>
-  <span class="tag">REGGAETON</span>
-
-</p>
+        <p class="tags">
+            <span>TRAP</span>
+            <span>RAP UNDERGROUND</span>
+            <span>REGGAETON</span>
+        </p>
 
     </div>
 
-  </div>
 
-</div>
+    <!-- ARTISTA 3: SEGA BODEGA -->
+
+    <button class="accordion">
+        <span class="artist-number">03/</span>
+        <span class="artist-name">SEGA BODEGA</span>
+    </button>
+
+    <div class="panel">
+
+        <div class="artist-top">
+
+            <img src="sega-bodega-2.jpg" class="artist-image" alt="Sega Bodega">
+
+            <div class="artist-info">
+
+                <h1>La electrònica emocional</h1>
+
+                <p>
+                    Sega Bodega transforma la música electrònica en un univers sonor
+                    experimental, on els ritmes de club es barregen amb veus distorsionades,
+                    sintetitzadors i atmosferes envoltants. La seva música combina
+                    vulnerabilitat i energia, creant cançons que oscil·len entre
+                    la introspecció i l'eufòria de la pista de ball.
+                </p>
+
+            </div>
+        </div>
+
+        <hr style="border: 1px solid lime; margin: 24px 0;">
+
+        <div class="song-card">
+            <a href="https://youtu.be/Wditpd0AvjI?si=Gzo6_iikCiDA9EUw"
+                target="_blank" rel="noopener noreferrer">
+
+                <img src="segabodega_cancion.jpg" alt="Sega Bodega - videoclip">
+
+                <p class="song-title">
+                    Sega Bodega — I Need Nothing From You
+                    <span>↗</span>
+                </p>
+
+            </a>
+        </div>
+
+        <p class="tags">
+            <span>ELECTRÒNICA</span>
+            <span>POP EXPERIMENTAL</span>
+            <span>DECONSTRUCTED CLUB</span>
+        </p>
+
+    </div>
 
 
+    <!-- PROJECTES DESTACATS -->
 
-<button class="accordion" style="background-color: black; color: white; 
-width: 100%; padding: 24px; border: none; text-align: left; display: flex; 
-align-items: baseline; gap: 24px; cursor: pointer;"><span style="font-family: 'Manrope', sans-serif;
-font-size: 12px; color: #999;">03/</span><span style="font-size: 36px;
-font-weight: 400; letter-spacing: -1.5px;">SEGA BODEGA </span></button>
+    <h1 class="section-title">
+        Projectes destacats
+    </h1>
 
+    <hr style="border: 1px solid lime; margin: 20px;">
 
+    <h4 style="color: white; margin: 20px;">
+        MISSATGE DEL FESTIVAL I INFO DELS VALORS ETC
+    </h4>
 
-<div class="panel">
-
-  <div class="artist-top">
-
-<img src="sega-bodega-2.jpg"
-    class="artist-image"
-    alt="Sega bodega" />
+    <hr style="border: 1px solid lime; margin: 20px;">
 
 
-    <div class="artist-info">
+    <!-- PROGRAMACIÓ I ACTIVITATS -->
 
-      <h1>La electrònica emocional</h1>
+    <h1 class="section-title" id="programacio">
+        Programació i activitats
+    </h1>
 
-      
-  <p style="color: white; line-height: 1.5; text-align: justify;">
-Sega Bodega transforma la música electrònica en un univers sonor experimental,
-on els ritmes de club es barregen amb veus distorsionades, sintetitzadors i 
-atmosferes envoltants. La seva música combina vulnerabilitat i energia, creant 
-cançons que oscil·len entre la introspecció i l'eufòria de la pista de ball.
-</p>
+    <h4 style="color: white; margin: 20px;">
+        ACTUACIONS
+    </h4>
 
-</div>
-  </div>
-
-<hr style="border: 1px solid lime; margin: 24px 0;">
-
-
-<div class="song-card">
-
-  <a href="https://youtu.be/Wditpd0AvjI?si=Gzo6_iikCiDA9EUw"
-     target="_blank"
-     rel="noopener noreferrer">
-
-    <img src="segabodega_cancion.jpg"
-         alt="Sega Bodega - videoclip">
-
-    <p class="song-title">
-      Sega Bodega — I Need Nothing From You
-      <span>↗</span>
+    <p class="section-text">
+        El festival comptarà amb diferents actuacions musicals al llarg del dia,
+        amb estils molt variats perquè tothom pugui gaudir del concert.
     </p>
 
-  </a>
+    <h4 style="color: white; margin: 20px;">
+        INSTAL·LACIONS
+    </h4>
 
-</div>
+    <p class="section-text">
+        El festival es fa al Parc del Fòrum de Barcelona, un espai molt gran situat
+        entre Sant Adrià de Besòs i Barcelona. Aquest lloc és ideal per fer festivals
+        i grans esdeveniments, ja que té una gran zona a l'aire lliure on es poden
+        posar diferents escenaris, lavabos, zones de descans i llocs per menjar.
+        A més, s'hi pot arribar fàcilment amb transport públic, com el metro,
+        el tramvia i l'autobús.
+    </p>
 
-<p class="tags">
+    <hr style="border: 1px solid #999; margin: 24px 20px;">
 
-  <span class="tag">ELECTRÒNICA</span>
-  <span class="tag">POP EXPERIMENTAL</span>
-  <span class="tag">DECONSTRUCTED CLUB</span>
 
-</p>
+    <!-- SERVEIS -->
+
+    <h1 class="section-title" id="serveis">
+        Serveis
+    </h1>
+
+
+    <!-- ACTUALITAT -->
+
+    <h1 class="section-title" id="actualitat">
+        Actualitat
+    </h1>
+
+
+    <!-- CONTACTE I NEWSLETTER -->
+
+    <h1 class="section-title" id="contacte">
+        Contacte
+    </h1>
+
+    <div class="form-field">
+
+        <p>NEWSLETTER:</p>
+
+        <label for="nom" class="form-label">Nom</label>
+        <input type="text" class="form-control" id="nom" placeholder="El teu nom">
 
     </div>
 
-  </div>
+    <div class="form-field">
 
-</div>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="El teu email">
 
-<h1 id="projectesdestacats"style="color: #24ec20;" font-family="Times New Roman", Times, serif;> Projectes destacats</h1>
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-<h4 style="color: white;">MISSATGE DEL FESTIVAL I INFO DELS VALORS ETC</h4> </h4>
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-<h1 style="color: #24ec20;">Programació i activitats</h1>
-<h4 style="color: white;">ACTUACIONS</h4> </h4>
-<p>El festival comptará amb diferents actuacions musicals al llarg del dia, amb estils molt variats perquè tothom pugui gaudir del concert.
-</p>
-<h4 style="color: white;">INSTAL·LACIONS</h4>
-<p>El festival es fa al Parc del Fòrum de Barcelona, un espai molt gran situat entre Sant Adrià de Besòs i Barcelona. Aquest lloc és ideal per fer festivals i grans esdeveniments, ja que té una gran zona a l’aire lliure on es poden posar diferents escenaris, lavabos, zones de descans i llocs per menjar. A més, s’hi pot arribar fàcilment amb transport públic, com el metro, el tramvia i l’autobús.
-</p>
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-<h1 id="serveis" style="color: #24ec20;">Serveis</h1>
-<h1 id="actualitat" style="color: #24ec20;">Actualitat</h1>
-<h1 id= "contacte" style="color: #24ec20;">Contacte</h1>
+    </div>
 
-    
-<div class="form-field">
+    <button type="button" class="submit-button">
+        Enviar
+    </button>
 
-     <p>NEWSLETTER:</p>
-  <label for="exampleFormControlTextarea1" class="form-label">Nom</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1"></textarea>
-</div>
 
-<div class="form-field">
-  <label for="exampleFormControlTextarea2" class="form-label">Email</label>
-  <textarea class="form-control" id="exampleFormControlTextarea2" rows="4"></textarea>
-</div>
+    <!-- FOOTER -->
 
-<button type="submit" style="margin: 20px">Enviar</button>
-  <script src="js/bootstrap.bundle.min.js"></script>   
+    <footer class="mt-auto pt-4 pb-3">
+
+        <div class="container">
+
+            <div class="row">
+
+                <!-- SOBRE NOSALTRES -->
+
+                <div class="col-md-3 mb-3">
+                    <h5>Sobre Nosaltres</h5>
+
+                    <p>
+                        Echofest som un festival de música que té com a objectiu
+                        reunir persones apassionades per la música, oferint-los
+                        l'oportunitat de gaudir de grans artistes i viure
+                        experiències úniques.
+                    </p>
+                </div>
+
+                <!-- CONTACTE -->
+
+                <div class="col-md-3 mb-3">
+                    <h5>Contacte</h5>
+
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-geo-alt-fill"></i> Parc del Fòrum, Barcelona</li>
+                        <li><i class="bi bi-telephone-fill"></i> +34 111 11 11 11</li>
+                        <li><i class="bi bi-envelope-fill"></i> contact@echofest.com</li>
+                    </ul>
+                </div>
+
+                <!-- XARXES SOCIALS -->
+
+                <div class="col-md-2 mb-3">
+                    <h5>Segueix-nos</h5>
+
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="https://www.facebook.com" target="_blank">
+                                <i class="bi bi-facebook fs-4"></i>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a href="https://twitter.com" target="_blank">
+                                <i class="bi bi-twitter fs-4"></i>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a href="https://www.instagram.com" target="_blank">
+                                <i class="bi bi-instagram fs-4"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <hr class="bg-dark">
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">
+                        &copy; 2026. Tots els drets reservats.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT DE BOOTSTRAP -->
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- JAVASCRIPT DELS ACORDEONS -->
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+
+        for (var i = 0; i < acc.length; i++) {
+
+            acc[i].addEventListener("click", function() {
+
+                this.classList.toggle("active");
+
+                var panel = this.nextElementSibling;
+
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+
+            });
+
+        }
+    </script>
 
 </body>
-
-
-
- <!-- FOOTER -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-<footer class="mt-auto text-dark pt-2 pb-2" style="background-color: #24ec20";>
-    <div class="container">
-        <div class="row">
-            <!-- Información de la empresa -->
-            <div class="col-md-3 mb-3">
-                <h5>Sobre Nosaltres</h5>
-                <p>Echofest sóm un festival de música que té com a objectiu reunir persones apassionades per la música, oferint-los l'oportunitat de gaudir de grans artistes i viure experiències úniques. </p>
-            </div>
-
-            <!-- Información de contacto -->
-            <div class="col-md-3 mb-3">
-                <h5>Contacte</h5>
-                <ul class="list-unstyled">
-                    <li><i class="bi bi-geo-alt-fill"></i> Parc del Fórum, Barcelona</li>
-                    <li><i class="bi bi-telephone-fill"></i> +34 111 11 11 11</li>
-                    <li><i class="bi bi-envelope-fill"></i> contact@echofest.com</li>
-                </ul>
-            </div>
-
-            <!-- Redes Sociales -->
-            <div class="col-md-2 mb-2">
-                <h5>Segueix-nos</h5>
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="https://www.facebook.com" class="text-dark"><i class="bi bi-facebook fs-4"></i></a></li>
-                    <li class="list-inline-item"><a href="https://twitter.com" class="text-dark"><i class="bi bi-twitter fs-4"></i></a></li>
-                    <li class="list-inline-item"><a href="https://www.instagram.com" class="text-dark"><i class="bi bi-instagram fs-4"></i></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <hr class="bg-dark">
-
-        <!-- Derechos de autor -->
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <p class="mb-0">&copy; 2026. Tots els drets reservats.</p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-    
-<script>
-    var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
-}
-
-let slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
-</script>
 </html>
